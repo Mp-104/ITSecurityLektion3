@@ -1,0 +1,12 @@
+Den här filen innehåller ingen känslig information.
+Men om du skulle ha en fil som innehåller känslig information och som ligger
+på din dator - utanför denna webapplikation?
+
+Uppgift:
+
+På din dator - skapa en ny mapp (folder) i samma mapp som denna webbapplikation
+ligger i.
+Skapa sedan en fil i den nya mappen och skriv lite 'känslig' data i filen.
+Filen kan ha ändelsen .txt för enkelhets skull.
+Starta om din server och se om du kan nå den nyskapade filen med känslig data.
+Tips: För att komma upp en nivå (utanför denna webbapplikation) kan du använda ..
