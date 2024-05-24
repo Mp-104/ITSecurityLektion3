@@ -89,20 +89,37 @@ public class LoginController {
 
         } else {
 
-            int count = 1;
-            Integer i = (Integer) session.getAttribute("Counter");
+            int count = 0;
 
-            if (i != null ) {
-                count = i.intValue() + 1;
+            Integer test = (Integer) session.getAttribute("Test");
+
+            session.setAttribute("Test", 345);
+            System.out.println(session.getAttribute("Test"));
+
+            // We use Integer instead of int because Integer can be null
+            Integer sessionCounter = (Integer) session.getAttribute(LOGIN_ATTEMPTS_KEY);
+            System.out.println(session.getAttribute(LOGIN_ATTEMPTS_KEY));
+            System.out.println("sessionCounter: " + sessionCounter);
+
+            // First time sessionCounter is null, so if-statement is skipped. Second time session is updated with .setAttribute(LOGIN_ATTEMPTS_KEY, count), no longer null
+            if (sessionCounter != null ) {
+                count = sessionCounter.intValue() + 1;
+                session.setAttribute("Test", 9999);
+                System.out.println(session.getAttribute("Test"));
+                System.out.println(session.getAttribute(LOGIN_ATTEMPTS_KEY));
             }
-            session.setAttribute("Counter", new Integer(count));
+            // Updating session by .setAttribute with LOGIN_ATTEMPTS_KEY with the value of count
+            session.setAttribute(LOGIN_ATTEMPTS_KEY, count);
+            //session.getAttribute is no longer null, so sessionCounter will be updated to the new int value the second go around
+            System.out.println("session.getAttribute: " + session.getAttribute(LOGIN_ATTEMPTS_KEY));
+            System.out.println("sessionCounter2: " + sessionCounter);
 
-            System.out.println(count);
+            System.out.println("count: " + count);
 
-            if (count > 3) {
+            if (count > 2) {
                 return "Account is locked";
             }
-            return "log in failed";
+            return "log in failed " + LOGIN_ATTEMPTS_KEY + " " + count;
         }
 
 
